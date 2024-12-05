@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - BaleiaBet</title>
+    <link rel="stylesheet" href="stylesheet.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url('https://source.unsplash.com/1600x900/?ocean,water');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            color: #ffffff;
+            font-family: 'Arial', sans-serif;
+            background-attachment: fixed;
+        }
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.4);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+        .form-container h2 {
+            margin-bottom: 1.5rem;
+            color: #1a237e;
+            font-size: 1.8rem;
+        }
+        .form-container input {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin: 0.5rem 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            outline: none;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        .form-container input:focus {
+            border-color: #1a237e;
+            box-shadow: 0 0 5px rgba(26, 35, 126, 0.5);
+        }
+        .form-container button {
+            background-color: #1a237e;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .form-container button:hover {
+            background-color: #0d47a1;
+            transform: scale(1.05);
+        }
+        .form-container button:active {
+            background-color: #0a3d90;
+            transform: scale(1);
+        }
+        .form-container p {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container" id="formContainer">
+        <h2>Login - BaleiaBet</h2>
+        <input type="text" id="loginUsername" placeholder="Usuário" required>
+        <input type="password" id="loginPassword" placeholder="Senha" required>
+        <button onclick="login()">Entrar</button>
+        <p id="loginMessage"></p>
+    </div>
+
+    <script>
+        function login() {
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+            const message = document.getElementById('loginMessage');
+
+            if (username === "" || password === "") {
+                message.textContent = "Por favor, preencha todos os campos.";
+                message.style.color = "red";
+                return;
+            }
+
+            let users = JSON.parse(localStorage.getItem('users')) || [];
+            const user = users.find(user => user.username === username && user.password === password);
+
+            if (user) {
+                message.textContent = "Login realizado com sucesso! Redirecionando...";
+                message.style.color = "green";
+
+                // Redireciona para a página principal após 2 segundos
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 2000);
+            } else {
+                message.textContent = "Usuário ou senha incorretos.";
+                message.style.color = "red";
+            }
+        }
+    </script>
+</body>
+</html>

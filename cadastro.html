@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - BaleiaBet</title>
+    <link rel="stylesheet" href="stylesheet.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url('https://images.unsplash.com/photo-1533723334026-1b8e97b15e2f');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            color: #ffffff;
+            font-family: 'Arial', sans-serif;
+            background-attachment: fixed;
+        }
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.3);
+            width: 320px;
+            text-align: center;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+        .form-container h2 {
+            margin-bottom: 1rem;
+            color: #1a237e;
+        }
+        .form-container input {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 0.5rem 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            outline: none;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        .form-container input:focus {
+            border-color: #1a237e;
+        }
+        .form-container button {
+            background-color: #1a237e;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .form-container button:hover {
+            background-color: #0d47a1;
+            transform: scale(1.05);
+        }
+        .form-container button:active {
+            background-color: #0a3d90;
+            transform: scale(1);
+        }
+        .form-container p {
+            margin-top: 1rem;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container" id="formContainer">
+        <h2>Cadastro - BaleiaBet</h2>
+        <input type="text" id="username" placeholder="Usuário" required>
+        <input type="password" id="password" placeholder="Senha" required>
+        <button onclick="register()">Cadastrar</button>
+        <p id="message"></p>
+    </div>
+
+    <script>
+        function register() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const message = document.getElementById('message');
+
+            if (username === "" || password === "") {
+                message.textContent = "Por favor, preencha todos os campos.";
+                message.style.color = "red";
+                return;
+            }
+
+            // Verifica se o usuário já existe
+            let users = JSON.parse(localStorage.getItem('users')) || [];
+            if (users.some(user => user.username === username)) {
+                message.textContent = "Usuário já existe. Tente outro nome.";
+                message.style.color = "red";
+                return;
+            }
+
+            // Adiciona o novo usuário
+            users.push({ username, password });
+            localStorage.setItem('users', JSON.stringify(users));
+            message.textContent = "Cadastro realizado com sucesso! Redirecionando para o login...";
+            message.style.color = "green";
+
+            // Redireciona para a página de login após 2 segundos
+            setTimeout(() => {
+                window.location.href = 'login.html';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

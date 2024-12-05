@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roleta</title>
+    <style>
+        /* Estilo geral */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            color: #17165a;
+        }
+
+        /* Contêiner da roleta */
+        .roulette-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: 50px auto;
+        }
+
+        /* Roleta */
+        .roulette {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 10px solid #17165a;
+            position: relative;
+            overflow: hidden;
+            transform-origin: center;
+        }
+
+        /* Setores */
+        .sector {
+            position: absolute;
+            width: 50%;
+            height: 50%;
+            background: #04c9cf;
+            transform-origin: 100% 100%;
+            clip-path: polygon(100% 100%, 100% 0, 0 0);
+        }
+
+        /* Indicador */
+        .indicator {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background-color: #ff0000;
+            clip-path: polygon(50% 0, 100% 100%, 0 100%);
+            z-index: 10;
+        }
+
+        /* Botão */
+        button {
+            background-color: #00eeff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #007bff;
+        }
+
+        /* Resultado */
+        #result {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Roleta</h1>
+    <div class="roulette-container">
+        <div class="indicator"></div>
+        <div class="roulette" id="roulette">
+            <!-- Setores da roleta -->
+            <div class="sector" style="background: #FF5733; transform: rotate(0deg);"></div>
+            <div class="sector" style="background: #FFC300; transform: rotate(60deg);"></div>
+            <div class="sector" style="background: #DAF7A6; transform: rotate(120deg);"></div>
+            <div class="sector" style="background: #33FF57; transform: rotate(180deg);"></div>
+            <div class="sector" style="background: #33FFF0; transform: rotate(240deg);"></div>
+            <div class="sector" style="background: #335CFF; transform: rotate(300deg);"></div>
+        </div>
+    </div>
+    <button id="spinButton">Girar</button>
+    <div id="result">Clique em "Girar" para começar!</div>
+
+    <script>
+        const roulette = document.getElementById('roulette');
+        const result = document.getElementById('result');
+        const spinButton = document.getElementById('spinButton');
+
+        const sectors = ["1", "2", "3", "4", "5", "6"]; // Setores da roleta
+        let isSpinning = false;
+
+        spinButton.addEventListener('click', () => {
+            if (isSpinning) return; // Evita múltiplos cliques
+            isSpinning = true;
+
+            const spinTime = 3000; // Duração do giro em milissegundos
+            const randomSector = Math.floor(Math.random() * sectors.length); // Seleciona setor aleatório
+            const spins = 5; // Número de voltas completas
+            const degrees = spins * 360 + randomSector * (360 / sectors.length);
+
+            // Define a rotação da roleta
+            roulette.style.transition = `transform ${spinTime / 1000}s ease-out`;
+            roulette.style.transform = `rotate(${degrees}deg)`;
+
+            // Após o giro, mostra o resultado
+            setTimeout(() => {
+                roulette.style.transition = 'none';
+                roulette.style.transform = `rotate(${randomSector * (360 / sectors.length)}deg)`;
+                result.textContent = `O número sorteado foi: ${sectors[randomSector]}`;
+                isSpinning = false;
+            }, spinTime);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BaleiaBet</title>
+    <link rel="stylesheet" href="stylesheet.css">
+</head>
+<body>
+    <header>
+            <h1>BaleiaBet<svg xmlns="http://www.w3.org/2000/svg" height="14" width="15.75" viewBox="0 0 576 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#00eeff" d="M180.5 141.5C219.7 108.5 272.6 80 336 80s116.3 28.5 155.5 61.5c39.1 33 66.9 72.4 81 99.8c4.7 9.2 4.7 20.1 0 29.3c-14.1 27.4-41.9 66.8-81 99.8C452.3 403.5 399.4 432 336 432s-116.3-28.5-155.5-61.5c-16.2-13.7-30.5-28.5-42.7-43.1L48.1 379.6c-12.5 7.3-28.4 5.3-38.7-4.9S-3 348.7 4.2 336.1L50 256 4.2 175.9c-7.2-12.6-5-28.4 5.3-38.6s26.1-12.2 38.7-4.9l89.7 52.3c12.2-14.6 26.5-29.4 42.7-43.1zM448 256a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></svg></h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Início</a></li>
+                <li><a href="apostas.html">Apostas</a></li>
+                <li><a href="cassino.html">Cassino</a></li>
+                <li><a href="contato.html">Contato</a></li>
+
+                
+            </ul>
+        </nav>
+    </header>
+   
+</head>
+<body>
+    <div class="container">
+
+        <div class="cassino">
+            <h2>Roulette Royale</h2>
+            <p>Jogue nossa versão emocionante da roleta! Escolha seus números e aposte na sorte.</p>
+            <a href="roleta.html">Jogar Roleta</a>
+        </div>
+        
+        
+
+        <div class="cassino">
+            <h2>Blackjack Royale</h2>
+            <p>Desafie a sorte e jogue uma partida emocionante de Blackjack!</p>
+            <a href="blackjack_game.html" target="_blank">Jogar Blackjack</a>
+        </div>
+    <div class="cassino">
+    <h1>Adivinhe o Número de 1 a 10</h1>
+    <input type="number" id="guess1to10" placeholder="Digite seu palpite">
+    <button onclick="guessNumber1to10()">Adivinhar</button>
+    <p id="result1to10"></p>
+
+    <script>
+        const randomNumber1to10 = Math.floor(Math.random() * 10) + 1;
+
+        function guessNumber1to10() {
+            const userGuess = parseInt(document.getElementById('guess1to10').value);
+            const resultElement = document.getElementById('result1to10');
+
+            if (userGuess === randomNumber1to10) {
+                resultElement.textContent = 'Parabéns! Você adivinhou o número.';
+            } else {
+                resultElement.textContent = 'Tente novamente daqui 10 minutos!';
+            }
+        }
+    </script>
+
+     <h1>Adivinhe o Número de 1 a 100</h1>
+     <input type="number" id="guess1to100" placeholder="Digite seu palpite">
+     <button onclick="guessNumber1to100()">Adivinhar</button>
+     <p id="result1to100"></p>
+ 
+     <script>
+         const randomNumber1to100 = Math.floor(Math.random() * 100) + 1;
+ 
+         function guessNumber1to100() {
+             const userGuess = parseInt(document.getElementById('guess1to100').value);
+             const resultElement = document.getElementById('result1to100');
+ 
+             if (userGuess === randomNumber1to100) {
+                 resultElement.textContent = 'Parabéns! Você adivinhou o número.';
+             } else if (userGuess > randomNumber1to100) {
+                 resultElement.textContent = 'Muito alto! Tente novamente.';
+             } else {
+                 resultElement.textContent = 'Muito baixo! Tente novamente.';
+             }
+         }
+     </script>
+
+      <h1>Adivinhe o Número de 1 a 1000</h1>
+      <input type="number" id="guess1to1000" placeholder="Digite seu palpite">
+      <button onclick="guessNumber1to1000()">Adivinhar</button>
+      <p id="result1to1000"></p>
+  
+      <script>
+          const randomNumber1to1000 = Math.floor(Math.random() * 1000) + 1;
+  
+          function guessNumber1to1000() {
+              const userGuess = parseInt(document.getElementById('guess1to1000').value);
+              const resultElement = document.getElementById('result1to1000');
+  
+              if (userGuess === randomNumber1to1000) {
+                  resultElement.textContent = 'Parabéns! Você adivinhou o número.';
+              } else if (userGuess > randomNumber1to1000) {
+                  resultElement.textContent = 'Muito alto! Tente novamente.';
+              } else {
+                  resultElement.textContent = 'Muito baixo! Tente novamente.';
+              }
+          }
+      </script>
+    </div>
+</div>
+    
+    <footer>
+        <p>&copy; 2024 BaleiaBet. Todos os direitos reservados.</p>
+    </footer>
+        
+</body>
+</html>
